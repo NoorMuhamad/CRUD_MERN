@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
 import Axios from 'axios';
+import { Link } from "react-router-dom";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -71,7 +72,7 @@ const TableData = () => {
                             <StyledTableCell >{row.Department}</StyledTableCell>
                             <StyledTableCell >{row.City}</StyledTableCell>
                             <StyledTableCell align="right"><Button color="secondary" onClick={() => deleteData(row._id)}
-                                startIcon={<DeleteIcon />}></Button><Button color="default" onClick={() => console.log(row)} startIcon={<EditIcon />}></Button></StyledTableCell>
+                                startIcon={<DeleteIcon />}></Button><Link to={`/update/${row._id}`}><Button color="default"startIcon={<EditIcon />}></Button></Link></StyledTableCell>
                         </StyledTableRow>
                     ))}
                 </TableBody>

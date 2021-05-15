@@ -31,9 +31,35 @@ app.get("/read", async (req,res)=>{
             }
         });
 })
+app.get("/read/:id", async (req,res)=>{
+    const _id = req.params.id;
+    StudentModel.findById({_id},(err,result)=>{
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send(result)
+        }
+    })
+})
 app.delete("/delete/:id",async (req,res)=>{
     const id = req.params.id;
     await StudentModel.findByIdAndDelete(id)
+})
+app.put("/updatedata" ,async (req,res)=>{
+    const _id=req.body.id
+    const Name=req.body.Name
+    const Email=req.body.Email
+    const Department=req.body.Department
+    const City=req.body.City
+    console.log(_id,Name,Email,Department,City)
+    await StudentModel.findByIdAndUpdate(_id,{Name,Email,Department,City},function (err, docs) {
+        if (err){
+            console.log(err)
+        }
+        else{
+            console.log("Updated User : ", docs);
+        }})
 })
 app.listen(3001,()=>{
     console.log("Server is running on port 3001.....")
